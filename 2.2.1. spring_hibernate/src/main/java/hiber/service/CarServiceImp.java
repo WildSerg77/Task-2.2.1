@@ -19,6 +19,11 @@ public class CarServiceImp implements CarService {
     }
     @Transactional
     @Override
+    public void update(Car car) {
+        carDao.update(car);
+    }
+    @Transactional
+    @Override
     public List<Car> listCars() {
         return carDao.listCars();
     }

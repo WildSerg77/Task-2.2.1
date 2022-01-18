@@ -28,6 +28,7 @@ public class MainApp {
 
             List<User> users = userService.listUsers();
             for (User user : users) {
+                System.out.println("Список пользователей");
                 System.out.println("Id = " + user.getId());
                 System.out.println("First Name = " + user.getFirstName());
                 System.out.println("Last Name = " + user.getLastName());
@@ -37,6 +38,7 @@ public class MainApp {
 
             List<Car> cars = carService.listCars();
             for (Car car : cars) {
+                System.out.println("Список машин");
                 System.out.println("Id = " + car.getId());
                 System.out.println("Model = " + car.getModel());
                 System.out.println("Series = " + car.getSeries());
@@ -46,15 +48,21 @@ public class MainApp {
             System.out.println("Список пользователи - машины");
             for (User user : users) {
                 int pos = users.size() - user.getId().intValue();
-                user.setCar(cars.get(pos));
+                Car car = cars.get(pos);
+                user.setCar(car);
+                userService.update(user);
+                car.setUser(user);
+                carService.update(car);
                 System.out.println("User Id = " + user.getId());
                 System.out.println("Car Id = " + user.getCar().getId());
+                System.out.println();
             }
             System.out.println("Список машины - пользователи");
             for (Car car : cars) {
                 System.out.println("Car Id = " + car.getId());
                 User user = userService.getUserByCar(car.getModel(), car.getSeries());
                 System.out.println("User Id = " + user.getId());
+                System.out.println();
             }
 
         } catch (Exception e) {
